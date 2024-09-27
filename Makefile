@@ -26,7 +26,7 @@ SRC_FILES = $(SRC_DIR)/init.c \
 		$(SRC_DIR)/update_player.c
 
 #	object files
-OBJ_FILES = $(SRC_FILES: .c =.o)
+OBJ_FILES = $(SRC_FILES:.c=.o)
 
 #	libraries
 LIBMLX = $(MLX_DIR)/libmlx.a
