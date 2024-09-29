@@ -23,6 +23,11 @@ static void	allocate_memory(t_map *map)
 	}
 }
 
+static void	set_map_data(t_map *map, int i, char *line)
+{
+	ft_strcpy(map->data[i], line);
+}
+
 static void	set_map_width(t_map *map, int fd, char **data)
 {
 	char	*line;
@@ -42,9 +47,10 @@ static void	set_map_width(t_map *map, int fd, char **data)
 		if (ft_strlen(line) != map->width)
 		{
 			ft_printf("Error:\ninconsistent map width");
+			free_map_data(map);
 			exit(1);
 		}
-		ft_strcpy(map->data[i], line);
+		set_map_data(map, i, line);
 		line = get_next_line(fd);
 		i++;
 	}
@@ -61,6 +67,7 @@ static void	set_map_height(t_map *map, int fd, char **data)
 		ft_printf("Error:\nempty map or empty line");
 		exit(1);
 	}
+	map->width = ft_strlen(line);
 	while (line != NULL)
 	{
 		map->height++;
