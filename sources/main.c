@@ -10,9 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "../so_long.h"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	printf("test\n");
+	if (argc != 2)
+	{
+		ft_printf("Error:\ncorrect usage: <%s> <map>", argv[0]);
+	}
+	init_game();
+	init_mlx();
 }
