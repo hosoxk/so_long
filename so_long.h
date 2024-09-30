@@ -81,6 +81,16 @@ typedef struct s_game
 	int			img_height;
 }	t_game;
 
+typedef struct s_bfs_state
+{
+	t_point *queue;
+	int **visited;
+	int front;
+	int rear;
+	int collectibles_found;
+	int exit_reached;
+}	t_bfs_state;
+
 //initializing
 void	init_game(t_game *game, const char *filename);
 void	init_mlx(t_game *game);

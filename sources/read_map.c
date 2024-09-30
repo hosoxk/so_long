@@ -94,4 +94,5 @@ t_map	read_map(const char *filename)
 	set_map_height(&map, fd, &map.data);
 	set_map_width(&map, fd, &map.data);
 	close(fd);
+	return (map);
 }
