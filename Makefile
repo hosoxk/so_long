@@ -16,14 +16,9 @@ SRC_FILES = $(SRC_DIR)/init.c \
 		$(SRC_DIR)/bfs.c \
 		$(SRC_DIR)/bfs_utils.c \
 		$(SRC_DIR)/check_map.c \
-		$(SRC_DIR)/check_map2.c \
-		$(SRC_DIR)/count_elements.c \
 		$(SRC_DIR)/free.c \
 		$(SRC_DIR)/read_map.c \
-		$(SRC_DIR)/print_utils.c \
 		$(SRC_DIR)/main.c \
-		$(SRC_DIR)/draw_images.c \
-		$(SRC_DIR)/update_player.c
 
 #	object files
 OBJ_FILES = $(SRC_FILES:.c=.o)

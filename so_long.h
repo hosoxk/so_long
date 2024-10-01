@@ -6,7 +6,7 @@
 /*   By: yde-rudd <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 09:36:44 by yde-rudd          #+#    #+#             */
-/*   Updated: 2024/09/18 15:13:09 by yde-rudd         ###   ########.fr       */
+/*   Updated: 2024/10/01 13:42:55 by yde-rudd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ typedef struct s_map
 	int		width;
 	int		height;
 	int		total_collectibles;
+	int		total_exits;
+	int		total_players;
 }	t_map;
 
 typedef struct s_game
@@ -83,12 +85,12 @@ typedef struct s_game
 
 typedef struct s_bfs_state
 {
-	t_point *queue;
-	int **visited;
-	int front;
-	int rear;
-	int collectibles_found;
-	int exit_reached;
+	t_point	*queue;
+	int		**visited;
+	int		front;
+	int		rear;
+	int		collectibles_found;
+	int		exit_reached;
 }	t_bfs_state;
 
 //initializing
@@ -99,17 +101,21 @@ void	setup_hook_events(t_game *game);
 
 //reading and checking map
 t_map	read_map(const char *filename);
-bool	check_illegal_characters(t_map *map);
-bool	is_map_valid(t_game *game);
-bool	bfs(t_map *map, t_point start, int total_collectibles);
-void	explore_adjacent(t_map *map, t_point *queue,
-			int **visited, t_point current, int *rear);
-bool	is_valid(int x, int y, t_map *map, int **visited);
-int		count_elements(t_map *map, char element);
+bool	is_map_valid(t_map *map);
 int		count_collectibles(t_map *map);
 int		count_player(t_map *map);
 int		count_exit(t_map *map);
 t_point	find_player_pos(t_game *game);
+
+//bfs algorithm
+bool	bfs(t_map *map, t_point start, int total_collectibles);
+int		**initialize_visited(t_map *map);
+t_point	*initialize_queue(t_map *map, t_point start, t_bfs_state *state);
+void	explore_adjacent(t_map *map, t_point current, t_bfs_state *state);
+bool	is_valid(int x, int y, t_map *map, int **visited);
+void	perror_exit(const char *message, t_map *map);
+void	cleanup(int **visited, t_point *queue, t_map *map);
+void	free_visited(int **visited, int up_to);
 
 //in-game
 void	draw_map(t_game *game);
@@ -119,7 +125,7 @@ int		check_key(int keycode, t_game *game);
 
 //free data
 void	destroy_game_resources(t_game *game);
-void	free_map(t_map *map);
+void	free_map_data(t_map *map);
 
 //print utils
 void	print_allocated_memory(t_map *map);

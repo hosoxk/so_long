@@ -1,6 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yde-rudd <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/01 12:47:04 by yde-rudd          #+#    #+#             */
+/*   Updated: 2024/10/01 12:50:02 by yde-rudd         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../so_long.h"
+
+static void	init_player(t_player *player)
+{
+	player->position.x = 0;
+	player->position.y = 0;
+	player->on_exit = 0;
+	player->moves = 0;
+}
+
 void	init_game(t_game *game, const char *filename)
 {
-	game->player = 0;
+	init_player(&game->player);
 	game->map = read_map(filename);
 	game->mlx = 0;
 	game->window = 0;
@@ -20,8 +42,9 @@ void	init_mlx(t_game *game)
 	{
 		perror("Error: could not initialize MLX\n");
 		exit(1);
-	} 
-	game->window = mlx_new_window(game->mlx, TILE_SIZE * game->map.width, TILE_SIZE * game->map.height, "so_long");
+	}
+	game->window = mlx_new_window(game->mlx, TILE_SIZE * game->map.width,
+			TILE_SIZE * game->map.height, "so_long");
 	if (!game->window)
 	{
 		perror("Error:\ncould not create a window\n");

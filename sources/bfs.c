@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bfs.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yde-rudd <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/01 12:51:50 by yde-rudd          #+#    #+#             */
+/*   Updated: 2024/10/01 12:51:52 by yde-rudd         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../so_long.h"
 
 static void	init_bfs_state(t_bfs_state *state, t_map *map, t_point start)
@@ -33,7 +45,7 @@ bool	bfs(t_map *map, t_point start, int total_collectibles)
 	process_nodes(&state, map);
 	cleanup(state.visited, state.queue, map);
 	if (state.collectibles_found == total_collectibles && state.exit_reached)
-	return (true);
+		return (true);
 	ft_printf("Error: Some collectibles or exit are not reachable.\n");
 	exit(1);
 }

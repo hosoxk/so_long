@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bfs_utils.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yde-rudd <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/01 12:52:02 by yde-rudd          #+#    #+#             */
+/*   Updated: 2024/10/01 13:23:16 by yde-rudd         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../so_long.h"
 
 int	**initialize_visited(t_map *map)
@@ -5,7 +17,7 @@ int	**initialize_visited(t_map *map)
 	int	**visited;
 	int	i;
 
-	visted = (int **)malloc(map->height * sizeof (int *));
+	visited = (int **)malloc(map->height * sizeof (int *));
 	if (!visited)
 		perror_exit("Error:\n memory allocation failed", map);
 	i = 0;
@@ -14,16 +26,16 @@ int	**initialize_visited(t_map *map)
 		visited[i] = (int *)ft_calloc(map->width, sizeof (int));
 		if (!visited[i])
 		{
-		perror_exit("Error:\n memory allocation failed", map);
-		free_visited(visited, i);
+			perror_exit("Error:\n memory allocation failed", map);
+			free_visited(visited, i);
 		}
 	}
-	return visited;
+	return (visited);
 }
 
 t_point	*initialize_queue(t_map *map, t_point start, t_bfs_state *state)
 {
-	t_point	*queue
+	t_point	*queue;
 
 	queue = (t_point *)malloc(map->height * map->width * sizeof (t_point));
 	if (!queue)
@@ -35,11 +47,16 @@ t_point	*initialize_queue(t_map *map, t_point start, t_bfs_state *state)
 
 void	explore_adjacent(t_map *map, t_point current, t_bfs_state *state)
 {
-	t_point	directions[4] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
-	int	new_x;
-	int	new_y;
-	int	i;
+	t_point	directions[4];
+	int		new_x;
+	int		new_y;
+	int		i;
 
+	directions[0] = (t_point){-1, 0};
+	directions[1] = (t_point){1, 0};
+	directions[2] = (t_point){0, -1};
+	directions[3] = (t_point){0, 1};
+	i = 0;
 	while (i < 4)
 	{
 		new_x = current.x + directions[i].x;
@@ -49,7 +66,7 @@ void	explore_adjacent(t_map *map, t_point current, t_bfs_state *state)
 			state->queue[state->rear++] = (t_point){new_x, new_y};
 			state->visited[new_x][new_y] = 1;
 		}
-	i++;
+		i++;
 	}
 }
 
