@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   freearr.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yde-rudd <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/27 14:34:05 by yde-rudd          #+#    #+#             */
-/*   Updated: 2024/10/02 23:02:04 by yde-rudd         ###   ########.fr       */
+/*   Created: 2024/10/02 20:45:33 by yde-rudd          #+#    #+#             */
+/*   Updated: 2024/10/02 20:51:51 by yde-rudd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+void	ft_freearr(char **arr)
 {
-	t_game	game;
+	int	i;
 
-	if (argc != 2)
-		return (ft_printf("Error:\ncorrect usage: %s <map>\n", argv[0]), 1);
-	init_game(&game, argv[1]);
-	if (!is_map_valid(&game.map))
-		return (ft_freearr(game.map.data), 1);
-	ft_freearr(game.map.data);
+	if (!arr)
+		return ;
+	if (!(*arr))
+		return (free(arr));
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
 }
-//	init_mlx(&game);

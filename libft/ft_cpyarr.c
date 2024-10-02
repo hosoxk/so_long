@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_cpyarr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yde-rudd <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/27 14:34:05 by yde-rudd          #+#    #+#             */
-/*   Updated: 2024/10/02 23:02:04 by yde-rudd         ###   ########.fr       */
+/*   Created: 2024/10/02 20:11:34 by yde-rudd          #+#    #+#             */
+/*   Updated: 2024/10/02 23:04:54 by yde-rudd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+char	**ft_cpyarr(char **src)
 {
-	t_game	game;
+	char	**dest;
+	int		i;
 
-	if (argc != 2)
-		return (ft_printf("Error:\ncorrect usage: %s <map>\n", argv[0]), 1);
-	init_game(&game, argv[1]);
-	if (!is_map_valid(&game.map))
-		return (ft_freearr(game.map.data), 1);
-	ft_freearr(game.map.data);
+	i = 0;
+	while (src[i] != NULL)
+		i++;
+	dest = (char **)malloc(sizeof(char *) * (i + 1));
+	if (!dest)
+		return (NULL);
+	i = 0;
+	while (src[i])
+	{
+		dest[i] = ft_strdup(src[i]);
+		if (!dest[i])
+			return (ft_freearr(dest), NULL);
+		i++;
+	}
+	dest[i] = NULL;
+	return (dest);
 }
-//	init_mlx(&game);

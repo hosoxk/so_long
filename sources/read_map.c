@@ -6,53 +6,81 @@
 /*   By: yde-rudd <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:43:21 by yde-rudd          #+#    #+#             */
-/*   Updated: 2024/10/01 14:46:28 by yde-rudd         ###   ########.fr       */
+/*   Updated: 2024/10/02 23:01:21 by yde-rudd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-static void	allocate_map_memory(t_map *map, const char *filename)
+static bool	is_ber_file(const char *filename)
+{
+	const char	*dot;
+
+	dot = ft_strrchr(filename, '.');
+	if (dot && (ft_strcmp(dot, ".ber") == 0))
+		return (true);
+	else
+		return (ft_printf("Error:\nfile is no .ber file\n"),
+			false);
+}
+
+static void	allocate_map_memory(t_map *map)
+{
+	map->data = (char **)malloc(sizeof (char *) * (map->height + 1));
+	if (map->data == NULL)
+	{
+		perror("Error:\nmemory allocation for height failed\n");
+		exit(1);
+	}
+}
+
+static void	set_map_width_and_height(t_map *map, int fd)
 {
 	char	*line;
-	int		fd;
+
+	line = get_next_line(fd);
+	if (!line)
+		return (ft_printf("Error:\nempty file\n"),
+			close(fd), exit(1));
+	map->width = ft_strlen_map(line);
+	while (line != NULL)
+	{
+		if (line[0] == '\n')
+			return (ft_printf("Error:\nempty line at %d\n", map->height + 1),
+				free_gnl(fd, line), exit(1));
+		if (map->width != (int)ft_strlen_map(line))
+			return (ft_printf("Error:\ninconsistent map width\n"),
+				free_gnl(fd, line), exit(1));
+		map->height++;
+		free(line);
+		line = get_next_line(fd);
+	}
+}
+
+static void	read_in_map_data(t_map *map, int fd, const char *filename)
+{
+	char	*line;
+	int		i;
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		return (perror("Error:\nopening map"), exit(1));
-	map->data = (char **)malloc(sizeof(char *) * map->height);
-	if (!map->data)
-		return (perror("Error:\nallocating height"), exit(1));
+		return (perror("Error:\nopening file\n"), exit(1));
+	i = 0;
 	line = get_next_line(fd);
 	if (!line)
-		return (ft_printf("Error:\nempty file or empty first line"), exit(1));
+		return (ft_freearr(map->data), close(fd), exit(1));
 	while (line != NULL)
 	{
-		*map->data = ft_strdup(line);
-		if (!*map->data)
-			return (perror("Error:\nduplicating data into map"), exit(1));
-		map->data++;
+		line[map->width] = '\0';
+		map->data[i] = ft_strdup(line);
+		if (!map->data[i])
+			return (ft_freearr(map->data), free_gnl(fd, line), ft_printf(
+					"Error:\nfailed to allocate memory for line\n"), exit(1));
+		free(line);
 		line = get_next_line(fd);
+		i++;
 	}
-	free(line);
-}
-
-static void	set_map_height(t_map *map, int fd)
-{
-	char	*line;
-
-	line = get_next_line(fd);
-	if (!line)
-	{
-		ft_printf("Error:\nempty map or empty line");
-		exit(1);
-	}
-	while (line != NULL)
-	{
-		map->height++;
-		line = get_next_line(fd);
-	}
-	free(line);
+	map->data[i] = NULL;
 	close(fd);
 }
 
@@ -61,20 +89,21 @@ t_map	read_map(const char *filename)
 	t_map	map;
 	int		fd;
 
-	map.data = NULL;
-	map.width = 0;
-	map.height = 0;
-	map.total_collectibles = 0;
-	map.total_exits = 0;
-	map.total_players = 0;
+	init_map(&map);
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{
-		perror("Error:\n");
+		perror("Error:\nopening file\n");
 		exit(1);
 	}
-	set_map_height(&map, fd);
-	allocate_map_memory(&map, filename);
+	if (!is_ber_file(filename))
+	{
+		close(fd);
+		exit(1);
+	}
+	set_map_width_and_height(&map, fd);
 	close(fd);
+	allocate_map_memory(&map);
+	read_in_map_data(&map, fd, filename);
 	return (map);
 }

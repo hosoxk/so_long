@@ -6,23 +6,20 @@
 /*   By: yde-rudd <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:55:36 by yde-rudd          #+#    #+#             */
-/*   Updated: 2024/10/01 13:49:40 by yde-rudd         ###   ########.fr       */
+/*   Updated: 2024/10/02 20:54:43 by yde-rudd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	free_map_data(t_map *map)
+void	free_gnl(int fd, char *line)
 {
-	int	i;
-
-	i = 0;
-	while (i < map->height)
+	while (line)
 	{
-		free(map->data[i]);
-		i++;
+		free(line);
+		line = get_next_line(fd);
 	}
-	free(map->data);
+	close(fd);
 }
 
 void	free_visited(int **visited, int up_to)

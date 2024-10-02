@@ -13,12 +13,13 @@ MLX_DIR = ./minilibx-linux
 
 #	source files
 SRC_FILES = $(SRC_DIR)/init.c \
-		$(SRC_DIR)/bfs.c \
-		$(SRC_DIR)/bfs_utils.c \
 		$(SRC_DIR)/check_map.c \
 		$(SRC_DIR)/free.c \
 		$(SRC_DIR)/read_map.c \
 		$(SRC_DIR)/main.c \
+		$(SRC_DIR)/is_map_enclosed.c \
+		$(SRC_DIR)/flooding_algo.c \
+		$(SRC_DIR)/print_utils.c
 
 #	object files
 OBJ_FILES = $(SRC_FILES:.c=.o)

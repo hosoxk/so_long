@@ -6,7 +6,7 @@
 /*   By: yde-rudd <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 09:36:44 by yde-rudd          #+#    #+#             */
-/*   Updated: 2024/10/01 13:42:55 by yde-rudd         ###   ########.fr       */
+/*   Updated: 2024/10/02 22:16:54 by yde-rudd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef struct s_bfs_state
 
 //initializing
 void	init_game(t_game *game, const char *filename);
+void	init_map(t_map *map);
 void	init_mlx(t_game *game);
 void	init_images(t_game *game);
 void	setup_hook_events(t_game *game);
@@ -102,20 +103,14 @@ void	setup_hook_events(t_game *game);
 //reading and checking map
 t_map	read_map(const char *filename);
 bool	is_map_valid(t_map *map);
+t_point	find_player_pos(t_map *map);
+bool	is_map_enclosed(t_map *map);
 int		count_collectibles(t_map *map);
 int		count_player(t_map *map);
 int		count_exit(t_map *map);
-t_point	find_player_pos(t_game *game);
 
-//bfs algorithm
-bool	bfs(t_map *map, t_point start, int total_collectibles);
-int		**initialize_visited(t_map *map);
-t_point	*initialize_queue(t_map *map, t_point start, t_bfs_state *state);
-void	explore_adjacent(t_map *map, t_point current, t_bfs_state *state);
-bool	is_valid(int x, int y, t_map *map, int **visited);
-void	perror_exit(const char *message, t_map *map);
-void	cleanup(int **visited, t_point *queue, t_map *map);
-void	free_visited(int **visited, int up_to);
+//algorithm
+bool	checking_algo(char **data, t_point start);
 
 //in-game
 void	draw_map(t_game *game);
@@ -125,10 +120,10 @@ int		check_key(int keycode, t_game *game);
 
 //free data
 void	destroy_game_resources(t_game *game);
-void	free_map_data(t_map *map);
+void	free_gnl(int fd, char *line);
 
 //print utils
 void	print_allocated_memory(t_map *map);
-void	print_map_data(t_map *map);
+void	print_map_data(char **data);
 
 #endif

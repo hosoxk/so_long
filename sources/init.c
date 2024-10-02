@@ -6,7 +6,7 @@
 /*   By: yde-rudd <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:47:04 by yde-rudd          #+#    #+#             */
-/*   Updated: 2024/10/01 12:50:02 by yde-rudd         ###   ########.fr       */
+/*   Updated: 2024/10/02 15:55:54 by yde-rudd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,16 @@ void	init_game(t_game *game, const char *filename)
 	game->exit_img = 0;
 	game->img_width = 0;
 	game->img_height = 0;
+}
+
+void	init_map(t_map *map)
+{
+	map->height = 0;
+	map->width = 0;
+	map->data = NULL;
+	map->total_collectibles = 0;
+	map->total_exits = 0;
+	map->total_players = 0;
 }
 
 void	init_mlx(t_game *game)
