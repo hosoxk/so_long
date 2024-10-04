@@ -6,7 +6,7 @@
 /*   By: yde-rudd <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:55:36 by yde-rudd          #+#    #+#             */
-/*   Updated: 2024/10/02 20:54:43 by yde-rudd         ###   ########.fr       */
+/*   Updated: 2024/10/04 19:01:15 by yde-rudd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,21 @@ void	cleanup(int **visited, t_point *queue, t_map *map)
 	}
 	free(visited);
 	free(queue);
+}
+
+void	free_mlx(t_game	*game)
+{
+	if (game->player_img)
+		mlx_destroy_image(game->mlx, game->player_img);
+	if (game->collectible_img)
+		mlx_destroy_image(game->mlx, game->collectible_img);
+	if (game->exit_img)
+		mlx_destroy_image(game->mlx, game->exit_img);
+	if (game->wall_img)
+		mlx_destroy_image(game->mlx, game->wall_img);
+	if (game->floor_img)
+		mlx_destroy_image(game->mlx, game->floor_img);
+	mlx_destroy_window(game->mlx, game->window);
+	mlx_destroy_display(game->mlx);
+	free(game->mlx);
 }

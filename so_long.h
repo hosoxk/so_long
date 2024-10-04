@@ -6,7 +6,7 @@
 /*   By: yde-rudd <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 09:36:44 by yde-rudd          #+#    #+#             */
-/*   Updated: 2024/10/02 22:16:54 by yde-rudd         ###   ########.fr       */
+/*   Updated: 2024/10/04 15:38:23 by yde-rudd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ int		check_key(int keycode, t_game *game);
 //free data
 void	destroy_game_resources(t_game *game);
 void	free_gnl(int fd, char *line);
-
+void	free_mlx(t_game *game);
 //print utils
 void	print_allocated_memory(t_map *map);
 void	print_map_data(char **data);

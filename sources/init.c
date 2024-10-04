@@ -6,7 +6,7 @@
 /*   By: yde-rudd <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:47:04 by yde-rudd          #+#    #+#             */
-/*   Updated: 2024/10/02 15:55:54 by yde-rudd         ###   ########.fr       */
+/*   Updated: 2024/10/04 18:53:55 by yde-rudd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,28 @@ void	init_mlx(t_game *game)
 		perror("Error:\ncould not create a window\n");
 		exit(1);
 	}
+}
+
+void	init_images(t_game *game)
+{
+	game->floor_img = mlx_new_image(game->mlx, TILE_SIZE, TILE_SIZE);
+	if (!game->floor_img)
+		return (ft_printf("Error:\ninitializing floor image\n"),
+			ft_freearr(game->map.data), free_mlx(game), exit(1));
+	game->wall_img = mlx_new_image(game->mlx, TILE_SIZE, TILE_SIZE);
+	if (!game->wall_img)
+		return (ft_printf("Error:\ninitializing wall image\n"),
+			ft_freearr(game->map.data), free_mlx(game), exit(1));
+	game->player_img = mlx_new_image(game->mlx, TILE_SIZE, TILE_SIZE);
+	if (!game->player_img)
+		return (ft_printf("Error:\ninitializing player image\n"),
+			ft_freearr(game->map.data), free_mlx(game), exit(1));
+	game->collectible_img = mlx_new_image(game->mlx, TILE_SIZE, TILE_SIZE);
+	if (!game->collectible_img)
+		return (ft_printf("Error:\ninitializing collectible image\n"),
+			ft_freearr(game->map.data), free_mlx(game), exit(1));
+	game->exit_img = mlx_new_image(game->mlx, TILE_SIZE, TILE_SIZE);
+	if (!game->exit_img)
+		return (ft_printf("Error:\ninitializing exit image\n"),
+			ft_freearr(game->map.data), free_mlx(game), exit(1));
 }
