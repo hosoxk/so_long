@@ -6,7 +6,7 @@
 /*   By: yde-rudd <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 09:36:44 by yde-rudd          #+#    #+#             */
-/*   Updated: 2024/10/04 15:38:23 by yde-rudd         ###   ########.fr       */
+/*   Updated: 2024/10/05 23:42:21 by yde-rudd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_player
 {
 	t_point	position;
 	int		collected_collectibles;
-	int		on_exit;
+	bool	on_exit;
 	int		moves;
 }	t_player;
 
@@ -83,31 +83,18 @@ typedef struct s_game
 	int			img_height;
 }	t_game;
 
-typedef struct s_bfs_state
-{
-	t_point	*queue;
-	int		**visited;
-	int		front;
-	int		rear;
-	int		collectibles_found;
-	int		exit_reached;
-}	t_bfs_state;
-
 //initializing
 void	init_game(t_game *game, const char *filename);
 void	init_map(t_map *map);
 void	init_mlx(t_game *game);
 void	init_images(t_game *game);
-void	setup_hook_events(t_game *game);
+void	set_up_hooks(t_game *game);
 
 //reading and checking map
 t_map	read_map(const char *filename);
 bool	is_map_valid(t_map *map);
 t_point	find_player_pos(t_map *map);
 bool	is_map_enclosed(t_map *map);
-int		count_collectibles(t_map *map);
-int		count_player(t_map *map);
-int		count_exit(t_map *map);
 
 //algorithm
 bool	checking_algo(char **data, t_point start);
@@ -115,15 +102,13 @@ bool	checking_algo(char **data, t_point start);
 //in-game
 void	draw_map(t_game *game);
 void	draw_tile(t_game *game, int x, int y, char tile);
-void	update_player(t_game *game, int keycode);
-int		check_key(int keycode, t_game *game);
 
 //free data
 void	destroy_game_resources(t_game *game);
 void	free_gnl(int fd, char *line);
 void	free_mlx(t_game *game);
+
 //print utils
-void	print_allocated_memory(t_map *map);
 void	print_map_data(char **data);
 
 #endif

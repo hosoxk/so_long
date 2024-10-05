@@ -6,7 +6,7 @@
 /*   By: yde-rudd <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:34:05 by yde-rudd          #+#    #+#             */
-/*   Updated: 2024/10/04 18:55:36 by yde-rudd         ###   ########.fr       */
+/*   Updated: 2024/10/05 23:16:28 by yde-rudd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ int	main(int argc, char **argv)
 		return (ft_freearr(game.map.data), 1);
 	init_mlx(&game);
 	init_images(&game);
-	ft_freearr(game.map.data);
-	free_mlx(&game);
+	draw_map(&game);
+	set_up_hooks(&game);
+	ft_printf("Player's pos; x = %d, y = %d", game.player.position.x, game.player.position.y);
+	ft_printf("Entering mlx_loop\n");
+	mlx_loop(game.mlx);
+	return (0);
 }

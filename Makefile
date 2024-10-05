@@ -19,6 +19,8 @@ SRC_FILES = $(SRC_DIR)/init.c \
 		$(SRC_DIR)/main.c \
 		$(SRC_DIR)/is_map_enclosed.c \
 		$(SRC_DIR)/flooding_algo.c \
+		$(SRC_DIR)/draw.c \
+		$(SRC_DIR)/update_player.c \
 		$(SRC_DIR)/print_utils.c
 
 #	object files
