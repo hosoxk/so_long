@@ -6,7 +6,7 @@
 /*   By: yde-rudd <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 18:35:13 by yde-rudd          #+#    #+#             */
-/*   Updated: 2024/10/02 19:53:37 by yde-rudd         ###   ########.fr       */
+/*   Updated: 2024/10/07 17:13:46 by yde-rudd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,7 @@ bool	is_map_enclosed(t_map *map)
 {
 	if (check_first_and_last_row(map) && check_first_and_last_column(map))
 		return (true);
+	ft_freearr(map->data);
+	exit(1);
 	return (false);
 }

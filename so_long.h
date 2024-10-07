@@ -6,7 +6,7 @@
 /*   By: yde-rudd <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 09:36:44 by yde-rudd          #+#    #+#             */
-/*   Updated: 2024/10/05 23:42:21 by yde-rudd         ###   ########.fr       */
+/*   Updated: 2024/10/07 14:42:54 by yde-rudd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,13 @@ bool	checking_algo(char **data, t_point start);
 //in-game
 void	draw_map(t_game *game);
 void	draw_tile(t_game *game, int x, int y, char tile);
+void	update_player(t_game *game, int new_x, int new_y);
 
 //free data
 void	destroy_game_resources(t_game *game);
 void	free_gnl(int fd, char *line);
 void	free_mlx(t_game *game);
+int		close_window(t_game *game);
 
 //print utils
 void	print_map_data(char **data);

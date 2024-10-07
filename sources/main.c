@@ -6,7 +6,7 @@
 /*   By: yde-rudd <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:34:05 by yde-rudd          #+#    #+#             */
-/*   Updated: 2024/10/05 23:16:28 by yde-rudd         ###   ########.fr       */
+/*   Updated: 2024/10/07 15:30:52 by yde-rudd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ int	main(int argc, char **argv)
 	init_images(&game);
 	draw_map(&game);
 	set_up_hooks(&game);
-	ft_printf("Player's pos; x = %d, y = %d", game.player.position.x, game.player.position.y);
-	ft_printf("Entering mlx_loop\n");
+	ft_printf("Total collectibles = %d\n", game.map.total_collectibles);
 	mlx_loop(game.mlx);
 	return (0);
 }

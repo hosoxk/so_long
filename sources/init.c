@@ -6,7 +6,7 @@
 /*   By: yde-rudd <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:47:04 by yde-rudd          #+#    #+#             */
-/*   Updated: 2024/10/05 23:42:34 by yde-rudd         ###   ########.fr       */
+/*   Updated: 2024/10/07 16:59:06 by yde-rudd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	init_mlx(t_game *game)
 	game->mlx = mlx_init();
 	if (!game->mlx)
 	{
+		ft_freearr(game->map.data);
 		perror("Error: could not initialize MLX\n");
 		exit(1);
 	}
@@ -63,6 +64,7 @@ void	init_mlx(t_game *game)
 			TILE_SIZE * game->map.height, "so_long");
 	if (!game->window)
 	{
+		free_mlx(game);
 		perror("Error:\ncould not create a window\n");
 		exit(1);
 	}

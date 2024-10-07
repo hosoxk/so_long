@@ -6,7 +6,7 @@
 /*   By: yde-rudd <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:24:00 by yde-rudd          #+#    #+#             */
-/*   Updated: 2024/10/05 23:20:27 by yde-rudd         ###   ########.fr       */
+/*   Updated: 2024/10/07 17:08:27 by yde-rudd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ bool	is_map_valid(t_map *map)
 	if (map->total_collectibles == 0 || map->total_exits != 1
 		|| map->total_players != 1 || !is_map_enclosed(map))
 		return (ft_printf("Error:\ninvalid amount of items\n"), false);
-	if (!checking_algo(map->data, find_player_pos(map)))
+	else if (!checking_algo(map->data, find_player_pos(map)))
 		return (ft_printf("Error:\nitems or exit not reachable\n"), false);
 	return (true);
 }

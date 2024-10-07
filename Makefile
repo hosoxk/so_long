@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: yde-rudd <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/10/07 17:16:13 by yde-rudd          #+#    #+#              #
+#    Updated: 2024/10/07 17:16:20 by yde-rudd         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 #	executable, compiler and flags
 NAME = so_long
 CC = cc
@@ -20,6 +32,7 @@ SRC_FILES = $(SRC_DIR)/init.c \
 		$(SRC_DIR)/is_map_enclosed.c \
 		$(SRC_DIR)/flooding_algo.c \
 		$(SRC_DIR)/draw.c \
+		$(SRC_DIR)/key_hook.c \
 		$(SRC_DIR)/update_player.c \
 		$(SRC_DIR)/print_utils.c
 
