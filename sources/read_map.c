@@ -6,7 +6,7 @@
 /*   By: yde-rudd <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:43:21 by yde-rudd          #+#    #+#             */
-/*   Updated: 2024/10/02 23:01:21 by yde-rudd         ###   ########.fr       */
+/*   Updated: 2024/10/08 12:08:52 by yde-rudd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ static void	read_in_map_data(t_map *map, int fd, const char *filename)
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		return (perror("Error:\nopening file\n"), exit(1));
+		return (perror("Error:\nopening file\n"), ft_freearr(map->data),
+			exit(1));
 	i = 0;
 	line = get_next_line(fd);
 	if (!line)
